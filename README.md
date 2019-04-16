@@ -1,7 +1,9 @@
 # Tetris
 
 - **Binary name:** tetris \<folder>
-- **Group members:** [@Kilio22](https://github.com/Kilio22)
+- **Group members:**  
+  - [@HeyShafty](https://github.com/HeyShafty)
+  - [@Kilio22](https://github.com/Kilio22)
 - **Mark:**
 
 ## Subject
