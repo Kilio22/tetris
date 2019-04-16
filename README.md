@@ -1,9 +1,10 @@
 # Tetris
 
 - **Binary name:** tetris \<folder>
+- **Group members:** [@Kilio22]https://github.com/Kilio22
 - **Mark:**
 
-# Subject
+## Subject
 
 The goal of this project is to recreate the Tetris game in a UNIX terminal, with the Gameboy version rules.  
 You have to use ncurses.
