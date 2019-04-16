@@ -19,7 +19,7 @@ const struct option optlist[] = {
     {"key-pause", required_argument, 0, 'p'},
     {"map-size", required_argument, 0, 0},
     {"without-next", no_argument, 0, 'w'},
-    {"debug", no_argument, 0, 0},
+    {"debug", no_argument, 0, 'D'},
     {0, 0, 0, 0}
 };
 
