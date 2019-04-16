@@ -1,4 +1,4 @@
-# Navy
+# Tetris
 
 - **Binary name:** tetris \<folder>
 - **Mark:**
