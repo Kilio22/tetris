@@ -23,10 +23,20 @@ const struct option optlist[] = {
     {0, 0, 0, 0}
 };
 
-const struct game_props_s default_tetris = {
-    1,
-    {20, 10},
-    false,
-    false,
-    {KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, 'q', ' '}
+const char *key_term[] = {
+    "kcub1",
+    "kcuf1",
+    "kcuu1",
+    "kcud1",
+    "q",
+    " "
+};
+
+const char *my_key_print[] = {
+    "Key Left",
+    "Key Right",
+    "Key Turn",
+    "Key Drop",
+    "Key Quit",
+    "Key Pause"
 };

@@ -42,7 +42,10 @@ SRC_PATH	=	$(ROOT_PATH)$(SRC_NAME)
 INCL_PATH	=	$(ROOT_PATH)$(INCL_NAME)
 TESTS_PATH	=	$(ROOT_PATH)$(TESTS_NAME)
 
-SRC	=	global_constants.c
+SRC	=	global_constants.c	\
+		init_game.c	\
+		utils.c	\
+		debug_mode.c
 
 SRC_LIB	=	stdio my string
 
@@ -53,7 +56,7 @@ OBJ	=	$(SRCS:.c=.o)
 LIBRARIES	=	$(SRC_LIB:%=-l%)
 LIB_PATHS_FLAG	=	$(LIB_PATHS:%=-L$(ROOT_PATH)%)
 
-CFLAGS	=	-Wall -Wextra -Werror -I $(INCL_PATH)
+CFLAGS	=	-Wall -Wextra -Werror -I $(INCL_PATH) -lncurses
 LDFLAGS	=	$(LIB_PATHS_FLAG) $(LIBRARIES)
 DEBUG_FLAGS	=	-g3 -gdwarf-4
 
