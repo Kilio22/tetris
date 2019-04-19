@@ -10,7 +10,11 @@
 
 int change_turnkey(struct game_props_s *game, char *arg)
 {
-    (void) game;
-    (void) arg;
+    if (!arg)
+        return -1;
+    free(game->keys[TURN]);
+    game->keys[TURN] = my_strdup(arg);
+    if (!game->keys[TURN])
+        return -1;
     return 0;
 }

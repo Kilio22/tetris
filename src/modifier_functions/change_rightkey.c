@@ -10,7 +10,11 @@
 
 int change_rightkey(struct game_props_s *game, char *arg)
 {
-    (void) game;
-    (void) arg;
+    if (!arg)
+        return -1;
+    free(game->keys[RIGHT]);
+    game->keys[RIGHT] = my_strdup(arg);
+    if (!game->keys[RIGHT])
+        return -1;
     return 0;
 }

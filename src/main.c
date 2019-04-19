@@ -15,7 +15,9 @@ int main(int argc, char *argv[])
     if (display_help(argc, argv))
         return 0;
     init_game(&game);
-    modify_game_props(argc, argv, &game);
-    debug_mode(&game);
+    if (modify_game_props(argc, argv, &game) == 84)
+        return 84;
+    if (game.debug == true)
+        debug_mode(&game);
     return (0);
 }
