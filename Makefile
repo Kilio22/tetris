@@ -45,7 +45,8 @@ TESTS_PATH	=	$(ROOT_PATH)$(TESTS_NAME)
 SRC	=	global_constants.c	\
 		init_game.c	\
 		utils.c	\
-		debug_mode.c
+		debug_mode.c	\
+		my_set_term.c
 
 SRC_LIB	=	stdio my string
 

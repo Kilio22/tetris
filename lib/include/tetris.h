@@ -21,6 +21,7 @@
 #include <my_stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/ioctl.h>
 
 
 #define READ_SIZE 4096
@@ -50,6 +51,7 @@ struct game_props_s {
 int my_error(char *str);
 int init_game(struct game_props_s *game);
 void debug_mode(struct game_props_s *game);
+int my_set_term(int status);
 
 extern const struct option optlist[];
 extern const struct game_props_s default_tetris;
