@@ -59,6 +59,11 @@ SRC	=	$(MOD_FUNCTIONS)/change_debug.c \
 		display_help.c \
 		global_constants.c \
 		modify_game_props.c
+		global_constants.c	\
+		init_game.c	\
+		utils.c	\
+		debug_mode.c	\
+		my_set_term.c
 
 SRC_LIB	=	stdio my string
 
@@ -69,7 +74,7 @@ OBJ	=	$(SRCS:.c=.o)
 LIBRARIES	=	$(SRC_LIB:%=-l%)
 LIB_PATHS_FLAG	=	$(LIB_PATHS:%=-L$(ROOT_PATH)%)
 
-CFLAGS	=	-Wall -Wextra -Werror -I $(INCL_PATH)
+CFLAGS	=	-Wall -Wextra -Werror -I $(INCL_PATH) -lncurses
 LDFLAGS	=	$(LIB_PATHS_FLAG) $(LIBRARIES)
 DEBUG_FLAGS	=	-g3 -gdwarf-4
 
