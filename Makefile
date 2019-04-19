@@ -42,7 +42,23 @@ SRC_PATH	=	$(ROOT_PATH)$(SRC_NAME)
 INCL_PATH	=	$(ROOT_PATH)$(INCL_NAME)
 TESTS_PATH	=	$(ROOT_PATH)$(TESTS_NAME)
 
-SRC	=	global_constants.c
+MOD_FUNCTIONS	=	modifier_functions
+
+SRC	=	$(MOD_FUNCTIONS)/change_debug.c \
+		$(MOD_FUNCTIONS)/change_dropkey.c \
+		$(MOD_FUNCTIONS)/change_leftkey.c \
+		$(MOD_FUNCTIONS)/change_level.c \
+		$(MOD_FUNCTIONS)/change_mapsize.c \
+		$(MOD_FUNCTIONS)/change_next.c \
+		$(MOD_FUNCTIONS)/change_pausekey.c \
+		$(MOD_FUNCTIONS)/change_quitkey.c \
+		$(MOD_FUNCTIONS)/change_rightkey.c \
+		$(MOD_FUNCTIONS)/change_turnkey.c \
+		$(MOD_FUNCTIONS)/function_constants.c \
+		$(MOD_FUNCTIONS)/option_constants.c \
+		display_help.c \
+		global_constants.c \
+		modify_game_props.c
 
 SRC_LIB	=	stdio my string
 
