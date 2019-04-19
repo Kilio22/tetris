@@ -26,8 +26,7 @@ int modify_game_props(int argc, char *argv[], struct game_props_s *game)
 
     opt = getopt_long(argc, argv, "L:l:r:t:d:q:p:wD", optlist, &optindex);
     while (opt != -1) {
-        if (change_opt(opt, game) == -1)
-            return -1;
+        change_opt(opt, game);
         opt = getopt_long(argc, argv, "L:l:r:t:d:q:p:wD", optlist, &optindex);
     }
     return 0;
