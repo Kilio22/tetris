@@ -57,8 +57,7 @@ SRC	=	$(MOD_FUNCTIONS)/change_debug.c \
 		$(MOD_FUNCTIONS)/function_constants.c \
 		$(MOD_FUNCTIONS)/option_constants.c \
 		display_help.c \
-		global_constants.c \
-		modify_game_props.c
+		modify_game_props.c	\
 		global_constants.c	\
 		init_game.c	\
 		utils.c	\
