@@ -5,6 +5,7 @@
 ** change_mapsize
 */
 
+#include <stdio.h>
 #include "my.h"
 #include "my_string.h"
 #include "tetris.h"
@@ -24,7 +25,7 @@ int change_mapsize(struct game_props_s *game, char *arg)
         return -1;
     game->size[0] = (size_t) my_atoi(array[0]);
     game->size[1] = (size_t) my_atoi(array[1]);
-    if (!game->size[0] || game->size[1])
+    if (!game->size[0] || !game->size[1])
         return -1;
     return 0;
 }

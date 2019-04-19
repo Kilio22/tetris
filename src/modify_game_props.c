@@ -16,7 +16,7 @@ static int change_opt(int opt, struct game_props_s *game)
         if (opt == args[i].opt)
             return args[i].change(game, optarg);
     }
-    return 0;
+    return 1;
 }
 
 int modify_game_props(int argc, char *argv[], struct game_props_s *game)
@@ -29,8 +29,6 @@ int modify_game_props(int argc, char *argv[], struct game_props_s *game)
         if (change_opt(opt, game))
             return 84;
         opt = getopt_long(argc, argv, "L:l:r:t:d:q:p:wD", optlist, &optindex);
-        if (opt == '?')
-            return 84;
     }
     return 0;
 }

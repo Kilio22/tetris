@@ -40,6 +40,15 @@ enum key_str {
     PAUSE
 };
 
+struct tetrimino_s {
+    char *name;
+    size_t width;
+    size_t height;
+    unsigned char color;
+    char **piece;
+    bool valid;
+};
+
 struct game_props_s {
     size_t level;
     size_t size[2];
@@ -47,13 +56,34 @@ struct game_props_s {
     bool debug;
     my_key_t keys[KEY_NB];
     int nb_tetriminos;
+    struct tetrimino_s **tetriminos;
 };
 
+int load_tetriminos(struct game_props_s *game);
+
+//get_piece
+char **scan_piece(FILE *f_stream, struct tetrimino_s *tetrimino);
+
 int display_help(int argc, char *argv[]);
+
 /* modifies the tetris properties according to the arguments */
 int modify_game_props(int argc, char *argv[], struct game_props_s *game);
 extern const struct option optlist[];
-extern const struct game_props_s default_tetris;
+
+//utils.c
+int my_error(char *str);
+
+//init_game.c
+int init_game(struct game_props_s *game);
+
+//debug
+void debug_mode(struct game_props_s *game);
+
+//set terminal
+int my_set_term(int status);
+
+extern const char *key_term[];
+extern const char *my_key_print[];
 
 /* modifier_functions */
 struct game_changer_s {
@@ -74,20 +104,4 @@ int change_pausekey(struct game_props_s *game, char *arg);
 
 extern const struct game_changer_s args[];
 
-//utils.c
-int my_error(char *str);
-
-//init_game.c
-int init_game(struct game_props_s *game);
-
-//debug
-void debug_mode(struct game_props_s *game);
-
-//set terminal
-int my_set_term(int status);
-
-extern const struct option optlist[];
-extern const struct game_props_s default_tetris;
-extern const char *key_term[];
-extern const char *my_key_print[];
 #endif /* !TETRIS_H_ */

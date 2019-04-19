@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     init_game(&game);
     if (modify_game_props(argc, argv, &game) == 84)
         return 84;
+    load_tetriminos(&game);
     if (game.debug == true)
         debug_mode(&game);
     return (0);
