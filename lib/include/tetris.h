@@ -68,6 +68,8 @@ struct game_props_s {
     struct tetrimino_s **tetriminos;
 };
 
+
+//load tetriminos
 int load_tetriminos(struct game_props_s *game);
 void sort_tetriminos(struct tetrimino_s **tetriminos);
 char **parse_first_line(FILE *f_stream);
@@ -77,8 +79,6 @@ char **analyse_tetrimino_props(char *line);
 struct tetrimino_s *init_tetrimino(FILE *f_stream, char *tetri_name);
 struct tetrimino_s **realloc_tetrimino(struct tetrimino_s **old,
 struct tetrimino_s *to_add);
-
-//get_piece
 char **scan_piece(FILE *f_stream, struct tetrimino_s *tetrimino);
 
 int display_help(int argc, char *argv[]);
