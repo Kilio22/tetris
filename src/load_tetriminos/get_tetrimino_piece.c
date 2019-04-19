@@ -10,7 +10,7 @@
 
 static int is_valid_line(char *line)
 {
-    for (int i = 0; line[i]; i++)
+    for (size_t i = 0; line[i]; i++)
         if (line[i] != '*' && line[i] != ' ')
             return -1;
     return 0;
@@ -18,16 +18,17 @@ static int is_valid_line(char *line)
 
 static int is_valid_piece(char **piece, struct tetrimino_s *tetrimino)
 {
-    size_t width = tetrimino->width;
-    size_t height = tetrimino->height;
-    size_t i = 0;
+    size_t cur_width = 0;
+    size_t cur_height = 0;
 
-    for (i = 0; piece[i]; i++);
-    if (i != height)
+    for (; piece[cur_height]; cur_height++)
+        if (my_strlen(piece[cur_height]) > cur_width)
+            cur_width = my_strlen(piece[cur_height]);
+    if (tetrimino->height != cur_height)
         return -1;
-    for (i = 0; piece[i]; i++) {
-        if (my_strlen(piece[i]) != width)
-            return -1;
+    if (tetrimino->width != cur_width)
+        return -1;
+    for (size_t i = 0; piece[i]; i++) {
         if (is_valid_line(piece[i]))
             return -1;
     }
@@ -46,7 +47,7 @@ char **scan_piece(FILE *f_stream, struct tetrimino_s *tetrimino)
         line[n_read - 1] = '\0';
         for (size_t j = my_strlen(line) - 1; line[j] == ' '; j--)
             line[j] = '\0';
-        piece = my_realloc_array(piece, line);
+        piece = my_realloc_array(piece, my_strdup(line));
     }
     if (is_valid_piece(piece, tetrimino))
         return NULL;

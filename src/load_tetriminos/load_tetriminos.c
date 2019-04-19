@@ -5,15 +5,6 @@
 ** load_tetriminos
 */
 
-#include <linux/limits.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <dirent.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #include "tetris.h"
 #include "my.h"
 #include "my_stdio.h"
@@ -21,13 +12,6 @@
 
 int is_readable_directory(const char *path);
 char *my_strcat_nofree(const char *left, const char *right);
-
-#define FREE_FIELDS(a) my_free_fields(a), NULL
-#define IS_TETRIMINO_FILE(dtype, dname, fname) ( \
-        dtype == DT_REG && \
-        !access(fname, R_OK) && \
-        my_str_ends_with(dname, ".tetrimino") \
-    )
 
 static struct tetrimino_s *create_tetrimino(char *name)
 {
@@ -42,42 +26,6 @@ static struct tetrimino_s *create_tetrimino(char *name)
     t->piece = NULL;
     t->valid = false;
     return t;
-}
-
-static char **analyse_tetrimino_props(char *line)
-{
-    char **array = my_str_towordarray(line, " \t");
-
-    free(line);
-    if (!array)
-        return NULL;
-    if (my_strarraylen(array) != 3)
-        return FREE_FIELDS(array);
-    if (!my_str_isnum(array[0], 0))
-        return FREE_FIELDS(array);
-    if (!my_str_isnum(array[1], 0))
-        return FREE_FIELDS(array);
-    if (!my_str_isnum(array[2], 0))
-        return FREE_FIELDS(array);
-    return array;
-}
-
-char **parse_first_line(FILE *f_stream)
-{
-    char *line = NULL;
-    size_t n = 0;
-    ssize_t n_read;
-    char **array;
-
-    n_read = getline(&line, &n, f_stream);
-    if (n_read == -1 || !line)
-        return NULL;
-    if (line[n_read - 1] == '\n')
-        line[n_read - 1] = '\0';
-    array = analyse_tetrimino_props(line);
-    if (!array)
-        return NULL;
-    return array;
 }
 
 struct tetrimino_s *init_tetrimino(FILE *f_stream, char *tetri_name)
@@ -97,31 +45,19 @@ struct tetrimino_s *init_tetrimino(FILE *f_stream, char *tetri_name)
     return t;
 }
 
-struct tetrimino_s **realloc_tetrimino(struct tetrimino_s **old, struct tetrimino_s *to_add)
+struct tetrimino_s **realloc_tetrimino(struct tetrimino_s **old,
+struct tetrimino_s *to_add)
 {
     size_t len = my_arraylen((void **)old) + 2;
     struct tetrimino_s **new = malloc(sizeof(struct tetrimino_s *) * len);
     size_t i = 0;
-    
+
     for (; old[i]; i++)
         new[i] = old[i];
     new[i++] = to_add;
     new[i] = NULL;
     free(old);
     return new;
-}
-
-void analyse_tetrimino_file(char *filepath, char *tetri_name,
-                            struct game_props_s *game)
-{
-    FILE *f_stream = fopen(filepath, "r");
-    struct tetrimino_s *t;
-
-    if (!f_stream)
-        return;
-    t = init_tetrimino(f_stream, tetri_name);
-    game->tetriminos = realloc_tetrimino(game->tetriminos, t);
-    game->nb_tetriminos++;
 }
 
 int scan_directory(char *folderpath, struct game_props_s *game)
@@ -151,5 +87,6 @@ int load_tetriminos(struct game_props_s *game)
     if (!is_readable_directory(tetriminos_folder_name))
         return 84;
     scan_directory(tetriminos_folder_name, game);
+    sort_tetriminos(game->tetriminos);
     return 0;
 }

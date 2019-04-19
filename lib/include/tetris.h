@@ -8,18 +8,21 @@
 #ifndef TETRIS_H_
 #define TETRIS_H_
 
+
+#include <linux/limits.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <dirent.h>
+#include <string.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <getopt.h>
 #include <ncurses.h>
-#include <sys/types.h>
-#include <curses.h>
 #include <term.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <fcntl.h>
-#include <string.h>
 #include <errno.h>
 #include <sys/ioctl.h>
 #include "my_string.h"
@@ -28,6 +31,12 @@
 
 #define READ_SIZE 4096
 #define KEY_NB 6
+#define FREE_FIELDS(a) my_free_fields(a), NULL
+#define IS_TETRIMINO_FILE(dtype, dname, fname) ( \
+        dtype == DT_REG && \
+        !access(fname, R_OK) && \
+        my_str_ends_with(dname, ".tetrimino") \
+    )
 
 typedef char * my_key_t;
 
@@ -60,6 +69,14 @@ struct game_props_s {
 };
 
 int load_tetriminos(struct game_props_s *game);
+void sort_tetriminos(struct tetrimino_s **tetriminos);
+char **parse_first_line(FILE *f_stream);
+void analyse_tetrimino_file(char *filepath, char *tetri_name,
+                            struct game_props_s *game);
+char **analyse_tetrimino_props(char *line);
+struct tetrimino_s *init_tetrimino(FILE *f_stream, char *tetri_name);
+struct tetrimino_s **realloc_tetrimino(struct tetrimino_s **old,
+struct tetrimino_s *to_add);
 
 //get_piece
 char **scan_piece(FILE *f_stream, struct tetrimino_s *tetrimino);
