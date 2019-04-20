@@ -9,9 +9,9 @@
 #include "my_string.h"
 #include "my_stdio.h"
 
-static int print_help(void)
+static int print_help(char *bin_name)
 {
-    my_puts("Usage: ./tetris [options]");
+    my_printf("Usage: %s [options]\n", bin_name);
     my_puts("Options:");
     my_puts(" --help \t\tDisplay this help");
     my_puts(" -L --level={num} \tStart Tetris at level num (def: 1)");
@@ -38,7 +38,7 @@ int display_help(int argc, char *argv[])
 {
     for (int i = 1; i < argc; i++) {
         if (STR_EQ("--help", argv[i]))
-            return print_help();
+            return print_help(argv[0]);
     }
     return 0;
 }
