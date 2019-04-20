@@ -66,6 +66,9 @@ struct game_props_s {
     my_key_t keys[KEY_NB];
     int nb_tetriminos;
     struct tetrimino_s **tetriminos;
+    char **map;
+    WINDOW **win;
+    int score;
 };
 
 
@@ -98,6 +101,14 @@ void debug_mode(struct game_props_s *game);
 
 //set terminal
 int my_set_term(int status);
+
+//print_windows
+void print_score_board(WINDOW *win, struct game_props_s *game);
+void print_next(WINDOW *win, struct game_props_s *game);
+
+//window_managment
+void update_windows(struct game_props_s *game);
+void create_windows(struct game_props_s *game);
 
 extern const char *key_term[];
 extern const char *my_key_print[];

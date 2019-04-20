@@ -69,7 +69,9 @@ SRC	=	$(LOAD_TETRIMIN)/analyse_tetrimino.c	\
 		init_game.c	\
 		utils.c	\
 		debug_mode.c	\
-		my_set_term.c
+		my_set_term.c	\
+		print_windows.c	\
+		windows_managment.c
 
 SRC_LIB	=	stdio my string
 
