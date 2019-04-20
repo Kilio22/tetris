@@ -64,5 +64,4 @@ void debug_mode(struct game_props_s *game)
     while (my_strlen(buff) <= 0)
         read(0, buff, READ_SIZE);
     my_set_term(1);
-    return;
 }
