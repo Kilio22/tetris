@@ -23,7 +23,7 @@ void create_windows(struct game_props_s *game)
 void update_windows(struct game_props_s *game)
 {
     for (int i = 0; i < 3; i++)
-        werase(game->win[i]);
+        wclear(game->win[i]);
     wborder(game->win[0], '|', '|', '-', '-', '/', '\\', '\\', '/');
     wborder(game->win[1], '|', '|', '-', '-', '/', '\\', '\\', '/');
     wborder(game->win[2], '|', '|', '-', '-', '+', '+', '+', '+');
