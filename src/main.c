@@ -8,7 +8,7 @@
 #include "tetris.h"
 #include "my_string.h"
 
-void game_luncher(struct game_props_s *game)
+void game_launcher(struct game_props_s *game)
 {
     char line[READ_SIZE] = {0};
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     if (game.debug == true)
         debug_mode(&game);
     my_set_term(0);
-    game_luncher(&game);
+    game_launcher(&game);
     my_set_term(1);
     return (0);
 }
