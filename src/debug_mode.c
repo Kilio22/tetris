@@ -48,8 +48,8 @@ void print_tetriminos(struct tetrimino_s **tetri)
         }
         my_printf("Size %d*%d : Color %d :\n", tetri[i]->height,
 tetri[i]->width, tetri[i]->color);
-        for (size_t j = 0; tetri[i]->piece[j]; j++)
-            my_printf("%s\n", tetri[i]->piece[j]);
+        for (size_t j = 0; tetri[i]->piece[0][j]; j++)
+            my_printf("%s\n", tetri[i]->piece[0][j]);
     }
 }
 

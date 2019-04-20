@@ -23,7 +23,10 @@ static struct tetrimino_s *create_tetrimino(char *name)
     t->width = 0;
     t->height = 0;
     t->color = 0;
-    t->piece = NULL;
+    t->piece[0] = NULL;
+    t->piece[1] = NULL;
+    t->piece[2] = NULL;
+    t->piece[3] = NULL;
     t->valid = false;
     return t;
 }
@@ -39,8 +42,8 @@ struct tetrimino_s *init_tetrimino(FILE *f_stream, char *tetri_name)
     t->height = my_atoi(array[1]);
     t->color = my_atoi(array[2]);
     my_free_fields(array);
-    t->piece = scan_piece(f_stream, t);
-    if (t->name && t->width && t->height && t->color && t->piece)
+    t->piece[0] = scan_piece(f_stream, t);
+    if (t->name && t->width && t->height && t->color && t->piece[0])
         t->valid = true;
     return t;
 }

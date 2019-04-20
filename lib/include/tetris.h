@@ -28,7 +28,6 @@
 #include "my_string.h"
 #include "my_stdio.h"
 
-
 #define READ_SIZE 4096
 #define KEY_NB 6
 #define FREE_FIELDS(a) my_free_fields(a), NULL
@@ -37,6 +36,14 @@
         !access(fname, R_OK) && \
         my_str_ends_with(dname, ".tetrimino") \
     )
+
+enum win_name {
+    SCORE,
+    GAME,
+    NEXT,
+    WIN_NAME_MAX
+};
+#define NB_WINDOW (WIN_NAME_MAX - game->next)
 
 typedef char * my_key_t;
 
@@ -54,12 +61,13 @@ struct tetrimino_s {
     size_t width;
     size_t height;
     unsigned char color;
-    char **piece;
+    char **piece[4];
     bool valid;
 };
 
 struct game_props_s {
     size_t level;
+    size_t score;
     size_t size[2];
     bool next;
     bool debug;
@@ -67,10 +75,8 @@ struct game_props_s {
     int nb_tetriminos;
     struct tetrimino_s **tetriminos;
     char **map;
-    WINDOW **win;
-    int score;
+    WINDOW *win[3];
 };
-
 
 //load tetriminos
 int load_tetriminos(struct game_props_s *game);
@@ -108,7 +114,7 @@ void print_next(WINDOW *win, struct game_props_s *game);
 
 //window_managment
 void update_windows(struct game_props_s *game);
-void create_windows(struct game_props_s *game);
+int create_windows(struct game_props_s *game);
 
 extern const char *key_term[];
 extern const char *my_key_print[];

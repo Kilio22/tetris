@@ -5,7 +5,6 @@
 ** print_windows
 */
 
-#include <time.h>
 #include "tetris.h"
 
 void print_next(WINDOW *win, struct game_props_s *game)
@@ -18,14 +17,13 @@ void print_next(WINDOW *win, struct game_props_s *game)
         ++i;
     if (i == game->nb_tetriminos)
         return;
-    srand(time(NULL));
     while (1) {
         i = rand() % game->nb_tetriminos;
         if (game->tetriminos[i]->valid)
             break;
     }
-    for (size_t j = 0; game->tetriminos[i]->piece[j]; j++)
-        mvwprintw(win, y++, 1, "%s", game->tetriminos[i]->piece[j]);
+    for (size_t j = 0; game->tetriminos[i]->piece[0][j]; j++)
+        mvwprintw(win, y++, 1, "%s", game->tetriminos[i]->piece[0][j]);
 }
 
 void print_score_board(WINDOW *win, struct game_props_s *game)

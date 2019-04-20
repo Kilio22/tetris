@@ -18,7 +18,7 @@ int my_set_term(int status)
             return my_error(strerror(errno));
         new.c_lflag &= ~ECHO;
         new.c_lflag &= ~ICANON;
-        new.c_cc[VTIME] = 1;
+        new.c_cc[VTIME] = 5;
         new.c_cc[VMIN] = 0;
         if (ioctl(0, TCSETS, &new))
             return my_error(strerror(errno));

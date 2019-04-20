@@ -7,28 +7,37 @@
 
 #include "tetris.h"
 
-void create_windows(struct game_props_s *game)
+int create_windows(struct game_props_s *game)
 {
-    game->win = malloc(sizeof(WINDOW *) * 3);
-    game->win[0] = subwin(stdscr, 10, 40, 40, 0);
-    game->win[1] = subwin(stdscr, 10, 20, 0, game->size[0] + 2 + 50);
-    game->win[2] = subwin(stdscr, game->size[0], game->size[1], 0, 50);
-    wborder(game->win[0], '|', '|', '-', '-', '/', '\\', '\\', '/');
-    wborder(game->win[1], '|', '|', '-', '-', '/', '\\', '\\', '/');
-    wborder(game->win[2], '|', '|', '-', '-', '+', '+', '+', '+');
-    for (int i = 0; i < 3; i++)
+    game->win[SCORE] = subwin(stdscr, 10, 40, 40, 0);
+    game->win[GAME] = subwin(stdscr, game->size[0], game->size[1], 0, 50);
+    if (!game->win[SCORE] || !game->win[GAME])
+        return -1;
+    wborder(game->win[SCORE], '|', '|', '-', '-', '/', '\\', '\\', '/');
+    wborder(game->win[GAME], '|', '|', '-', '-', '+', '+', '+', '+');
+    if (!game->next) {
+        game->win[NEXT] = subwin(stdscr, 10, 20, 0, game->size[0] + 2 + 50);
+        if (!game->win[NEXT])
+            return -1;
+        wborder(game->win[NEXT], '|', '|', '-', '-', '/', '\\', '\\', '/');
+    }
+    for (int i = 0; i < NB_WINDOW; i++)
         wrefresh(game->win[i]);
+    return 0;
 }
 
 void update_windows(struct game_props_s *game)
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < NB_WINDOW; i++)
         wclear(game->win[i]);
-    wborder(game->win[0], '|', '|', '-', '-', '/', '\\', '\\', '/');
-    wborder(game->win[1], '|', '|', '-', '-', '/', '\\', '\\', '/');
-    wborder(game->win[2], '|', '|', '-', '-', '+', '+', '+', '+');
-    print_next(game->win[1], game);
-    print_score_board(game->win[0], game);
-    for (int i = 0; i < 3; i++)
+    wborder(game->win[SCORE], '|', '|', '-', '-', '/', '\\', '\\', '/');
+    print_score_board(game->win[SCORE], game);
+    wborder(game->win[GAME], '|', '|', '-', '-', '+', '+', '+', '+');
+    // print_game(game);
+    if (!game->next) {
+        wborder(game->win[NEXT], '|', '|', '-', '-', '/', '\\', '\\', '/');
+        print_next(game->win[NEXT], game);
+    }
+    for (int i = 0; i < NB_WINDOW; i++)
         wrefresh(game->win[i]);
 }
