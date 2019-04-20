@@ -14,18 +14,18 @@ void print_next(WINDOW *win, struct game_props_s *game)
     int y = 1;
 
     mvwprintw(win, 0, 2, "next");
-    for (; game->tetriminos[i] && game->tetriminos[i]->valid == false; i++);
+    while (game->tetriminos[i] && !game->tetriminos[i]->valid)
+        ++i;
     if (i == game->nb_tetriminos)
         return;
     srand(time(NULL));
     while (1) {
         i = rand() % game->nb_tetriminos;
-        if (game->tetriminos[i]->valid == false)
-            continue;
-        break;
+        if (game->tetriminos[i]->valid)
+            break;
     }
-    for (size_t j = 0; game->tetriminos[i]->piece[j]; j++, y++)
-        mvwprintw(win, y, 1, "%s", game->tetriminos[i]->piece[j]);
+    for (size_t j = 0; game->tetriminos[i]->piece[j]; j++)
+        mvwprintw(win, y++, 1, "%s", game->tetriminos[i]->piece[j]);
 }
 
 void print_score_board(WINDOW *win, struct game_props_s *game)
