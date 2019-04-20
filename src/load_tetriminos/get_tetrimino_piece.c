@@ -44,7 +44,8 @@ char **scan_piece(FILE *f_stream, struct tetrimino_s *tetrimino)
 
     piece[0] = NULL;
     while ((n_read = getline(&line, &n, f_stream)) != -1) {
-        line[n_read - 1] = '\0';
+        if (line[n_read - 1] == '\n')
+            line[n_read - 1] = '\0';
         for (size_t j = my_strlen(line) - 1; line[j] == ' '; j--)
             line[j] = '\0';
         piece = my_realloc_array(piece, my_strdup(line));
