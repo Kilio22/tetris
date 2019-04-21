@@ -21,6 +21,7 @@ static void analyse_tetrimino_file(char *filepath, char *tetri_name,
     t = init_tetrimino(f_stream, tetri_name);
     game->tetriminos = realloc_tetrimino(game->tetriminos, t);
     game->nb_tetriminos++;
+    fclose(f_stream);
 }
 
 static int scan_directory(char *folderpath, struct game_props_s *game)
