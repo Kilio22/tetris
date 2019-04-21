@@ -8,7 +8,7 @@
 #include "my_string.h"
 #include "tetris.h"
 
-void print_keys(struct game_props_s *game, int i)
+static void print_keys(struct game_props_s *game, int i)
 {
     for (int j = 0; game->keys[i][j]; j++) {
         if (game->keys[i][j] == 27) {
@@ -20,7 +20,7 @@ void print_keys(struct game_props_s *game, int i)
     }
 }
 
-void print_debug(struct game_props_s *game)
+static void print_debug(struct game_props_s *game)
 {
     my_puts("*** DEBUG MODE ***");
     for (int i = 0; i < 6; i++) {
