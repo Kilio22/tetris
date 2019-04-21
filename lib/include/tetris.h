@@ -81,14 +81,10 @@ struct game_props_s {
 //load tetriminos
 int load_tetriminos(struct game_props_s *game);
 void sort_tetriminos(struct tetrimino_s **tetriminos);
-char **parse_first_line(FILE *f_stream);
-void analyse_tetrimino_file(char *filepath, char *tetri_name,
-                            struct game_props_s *game);
-char **analyse_tetrimino_props(char *line);
+char **scan_piece(FILE *f_stream, struct tetrimino_s *tetrimino);
 struct tetrimino_s *init_tetrimino(FILE *f_stream, char *tetri_name);
 struct tetrimino_s **realloc_tetrimino(struct tetrimino_s **old,
-struct tetrimino_s *to_add);
-char **scan_piece(FILE *f_stream, struct tetrimino_s *tetrimino);
+                                        struct tetrimino_s *to_add);
 
 int display_help(int argc, char *argv[]);
 
@@ -96,8 +92,10 @@ int display_help(int argc, char *argv[]);
 int modify_game_props(int argc, char *argv[], struct game_props_s *game);
 extern const struct option optlist[];
 
-//utils.c
+// utils
 int my_error(char *str);
+int is_readable_directory(const char *path);
+char *my_strcat_nofree(const char *left, const char *right);
 
 //init_game.c
 int init_game(struct game_props_s *game);

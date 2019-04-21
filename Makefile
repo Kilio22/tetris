@@ -45,8 +45,8 @@ TESTS_PATH	=	$(ROOT_PATH)$(TESTS_NAME)
 LOAD_TETRIMIN	=	load_tetriminos
 MOD_FUNCTIONS	=	modifier_functions
 
-SRC	=	$(LOAD_TETRIMIN)/analyse_tetrimino.c	\
-		$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
+SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
+		$(LOAD_TETRIMIN)/init_tetrimino.c \
 		$(LOAD_TETRIMIN)/is_directory.c \
 		$(LOAD_TETRIMIN)/load_tetriminos.c \
 		$(LOAD_TETRIMIN)/my_strcat_nofree.c \
