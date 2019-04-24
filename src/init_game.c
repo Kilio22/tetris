@@ -25,7 +25,7 @@ int init_keys(struct game_props_s *game)
 {
     int err;
 
-    if (setupterm(NULL, 1, &err))
+    if (setupterm(game->term, 1, &err))
         return my_error(strerror(errno));
     for (int i = 0; i < 4; i++)
         game->keys[i] = my_strdup(tigetstr(key_term[i]));
@@ -48,16 +48,20 @@ int init_base(struct game_props_s *game)
     return 0;
 }
 
-int init_game(struct game_props_s *game)
+int init_game(struct game_props_s *game, char **env)
 {
+    int i = 0;
     char *buff = NULL;
 
+    for (; my_strncmp(env[i], "TERM", 4); i++);
+    game->term = my_strdup(&env[i][5]);
     init_base(game);
     init_keys(game);
-    if (!(buff = tigetstr("smkx")))
-        return my_error(strerror(errno));
+    buff = tigetstr("smkx");
     if (check_term_size(game))
         return my_error("To small terminal");
+    if (buff == NULL)
+        return 0;
     if (putp(buff) == -1)
         return my_error(strerror(errno));
     return 0;

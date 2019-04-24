@@ -55,7 +55,7 @@ static int game_launcher(struct game_props_s *game)
     return 0;
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[], char **env)
 {
     struct game_props_s game;
     int n_return;
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     if (display_help(argc, argv))
         return 0;
     srand(time(NULL));
-    init_game(&game);
+    init_game(&game, env);
     if (modify_game_props(argc, argv, &game) == 84)
         return print_help(argv[0]), 84;
     if (load_tetriminos(&game) == 84)

@@ -75,6 +75,7 @@ struct game_props_s {
     int nb_tetriminos;
     struct tetrimino_s **tetriminos;
     char **map;
+    char *term;
     WINDOW *win[3];
 };
 
@@ -99,7 +100,7 @@ char *my_strcat_nofree(const char *left, const char *right);
 int print_help(char *bin_name);
 
 //init_game.c
-int init_game(struct game_props_s *game);
+int init_game(struct game_props_s *game, char **env);
 
 //debug
 void debug_mode(struct game_props_s *game);
