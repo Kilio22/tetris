@@ -65,9 +65,9 @@ int main(int argc, char *argv[])
     srand(time(NULL));
     init_game(&game);
     if (modify_game_props(argc, argv, &game) == 84)
-        return 84;
+        return print_help(argv[0]), 84;
     if (load_tetriminos(&game) == 84)
-        return 84;
+        return print_help(argv[0]), 84;
     if (game.debug == true)
         debug_mode(&game);
     if (game_launcher(&game) == -1)

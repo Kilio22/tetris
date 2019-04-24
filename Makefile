@@ -73,7 +73,7 @@ SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
 		print_windows.c	\
 		windows_managment.c
 
-SRC_LIB	=	stdio my string
+SRC_LIB	=	stdio my string ncurses
 
 LIB_PATHS	=	lib/stdio lib/my lib/string
 
@@ -82,7 +82,7 @@ OBJ	=	$(SRCS:.c=.o)
 LIBRARIES	=	$(SRC_LIB:%=-l%)
 LIB_PATHS_FLAG	=	$(LIB_PATHS:%=-L$(ROOT_PATH)%)
 
-CFLAGS	=	-Wall -Wextra -Werror -I $(INCL_PATH) -lncurses
+CFLAGS	=	-Wall -Wextra -Werror -I $(INCL_PATH)
 LDFLAGS	=	$(LIB_PATHS_FLAG) $(LIBRARIES)
 DEBUG_FLAGS	=	-g3 -gdwarf-4
 
