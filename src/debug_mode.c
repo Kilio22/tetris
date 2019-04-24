@@ -34,7 +34,7 @@ static void print_debug(struct game_props_s *game)
     }
     my_printf("Next : %s\n", (game->next == false ? "Yes" : "No"));
     my_printf("Level : %d\n", game->level);
-    my_printf("Size : %d*%d\n", game->size[0], game->size[1]);
+    my_printf("Size : %d*%d\n", game->size[1], game->size[0]);
     my_printf("Tetriminos : %d\n", game->nb_tetriminos);
 }
 
