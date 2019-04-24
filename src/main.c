@@ -39,7 +39,6 @@ static int game_launcher(struct game_props_s *game)
         return -1;
     while (1) {
         n_read = read(0, line, READ_SIZE);
-        fprintf(stderr, "Read : %s[%ld]\n", line, n_read);
         if (my_strcmp(game->keys[QUIT], line) == 0)
             break;
         my_memset(line, '\0', n_read);

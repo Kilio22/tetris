@@ -33,7 +33,6 @@ void update_windows(struct game_props_s *game)
     wborder(game->win[SCORE], '|', '|', '-', '-', '/', '\\', '\\', '/');
     print_score_board(game->win[SCORE], game);
     wborder(game->win[GAME], '|', '|', '-', '-', '+', '+', '+', '+');
-    // print_game(game);
     if (!game->next) {
         wborder(game->win[NEXT], '|', '|', '-', '-', '/', '\\', '\\', '/');
         print_next(game->win[NEXT], game);
