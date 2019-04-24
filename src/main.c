@@ -27,6 +27,10 @@ static int destroy_game(struct game_props_s *game)
     for (int i = 0; i < NB_WINDOW; i++)
         delwin(game->win[i]);
     endwin();
+    for (int i = 0; game->tetriminos[i]; i++) {
+        free(game->tetriminos[i]->name);
+        free(game->tetriminos[i]);
+    }
     return 0;
 }
 
