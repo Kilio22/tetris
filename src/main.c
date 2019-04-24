@@ -35,6 +35,8 @@ static int game_launcher(struct game_props_s *game)
     char line[READ_SIZE] = {0};
     ssize_t n_read;
 
+    initscr();
+    my_set_term(0);
     if (setup_game(game) == -1)
         return -1;
     while (1) {
@@ -44,6 +46,8 @@ static int game_launcher(struct game_props_s *game)
         my_memset(line, '\0', n_read);
         update_windows(game);
     }
+    my_set_term(1);
+    destroy_game(game);
     return 0;
 }
 
@@ -62,11 +66,7 @@ int main(int argc, char *argv[])
         return 84;
     if (game.debug == true)
         debug_mode(&game);
-    initscr();
-    my_set_term(0);
     if (game_launcher(&game) == -1)
         n_return = 84;
-    my_set_term(1);
-    destroy_game(&game);
     return n_return;
 }
