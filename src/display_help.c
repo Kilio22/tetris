@@ -9,7 +9,7 @@
 #include "my_string.h"
 #include "my_stdio.h"
 
-static int print_help(char *bin_name)
+int print_help(char *bin_name)
 {
     my_printf("Usage: %s [options]\n", bin_name);
     my_puts("Options:");
@@ -37,6 +37,8 @@ static int print_help(char *bin_name)
 int display_help(int argc, char *argv[])
 {
     for (int i = 1; i < argc; i++) {
+        if (*argv[i] != '-')
+            return print_help(argv[0]);
         if (STR_EQ("--help", argv[i]))
             return print_help(argv[0]);
     }

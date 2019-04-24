@@ -14,8 +14,8 @@ int change_mapsize(struct game_props_s *game, char *arg)
 {
     char **array;
 
-    if (!arg)
-        return -1;
+    if (!arg || !*arg)
+        return print_help("./tetris"), -1;
     array = my_str_towordarray(arg, ",");
     if (!array)
         return -1;

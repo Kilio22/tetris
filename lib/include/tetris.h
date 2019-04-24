@@ -96,6 +96,7 @@ extern const struct option optlist[];
 int my_error(char *str);
 int is_readable_directory(const char *path);
 char *my_strcat_nofree(const char *left, const char *right);
+int print_help(char *bin_name);
 
 //init_game.c
 int init_game(struct game_props_s *game);

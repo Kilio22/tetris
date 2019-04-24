@@ -10,8 +10,8 @@
 
 int change_level(struct game_props_s *game, char *arg)
 {
-    if (!arg)
-        return -1;
+    if (!arg || !*arg)
+        return print_help("./tetris"), -1;
     if (!my_str_isnum(arg, 0))
         return -1;
     game->level = my_atoi(arg);
