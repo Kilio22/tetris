@@ -37,7 +37,7 @@ int print_help(char *bin_name)
 int display_help(int argc, char *argv[])
 {
     for (int i = 1; i < argc; i++) {
-        if (argv[i][0] != '-')
+        if (argv[i][0] != '-' && argv[i - 1][0] != '-')
             return print_help(argv[0]);
         if (STR_EQ("--help", argv[i]))
             return print_help(argv[0]);
