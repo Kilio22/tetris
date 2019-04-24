@@ -10,7 +10,7 @@
 
 int change_level(struct game_props_s *game, char *arg)
 {
-    if (!arg || !*arg)
+    if (!arg || !*arg  || *arg == '=')
         return print_help("./tetris"), -1;
     if (!my_str_isnum(arg, 0))
         return -1;

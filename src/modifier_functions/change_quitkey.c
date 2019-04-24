@@ -10,7 +10,7 @@
 
 int change_quitkey(struct game_props_s *game, char *arg)
 {
-    if (!arg || !*arg)
+    if (!arg || !*arg || *arg == '=')
         return print_help("./tetris"), -1;
     free(game->keys[QUIT]);
     game->keys[QUIT] = my_strdup(arg);
