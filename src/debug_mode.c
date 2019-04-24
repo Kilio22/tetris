@@ -34,7 +34,7 @@ static void print_debug(struct game_props_s *game)
     }
     my_printf("Next : %s\n", (game->next == false ? "Yes" : "No"));
     my_printf("Level : %d\n", game->level);
-    my_printf("Size : %d*%d\n", game->size[1], game->size[0]);
+    my_printf("Size : %d*%d\n", game->size[0], game->size[1]);
     my_printf("Tetriminos : %d\n", game->nb_tetriminos);
 }
 
@@ -46,8 +46,8 @@ void print_tetriminos(struct tetrimino_s **tetri)
             my_printf("Error\n");
             continue;
         }
-        my_printf("Size %d*%d : Color %d :\n", tetri[i]->height,
-tetri[i]->width, tetri[i]->color);
+        my_printf("Size %d*%d : Color %d :\n", tetri[i]->width,
+tetri[i]->height, tetri[i]->color);
         for (size_t j = 0; tetri[i]->piece[0][j]; j++)
             my_printf("%s\n", tetri[i]->piece[0][j]);
     }
