@@ -13,15 +13,15 @@
 static void analyse_tetrimino_file(char *filepath, char *tetri_name,
                                     struct game_props_s *game)
 {
-    FILE *f_stream = fopen(filepath, "r");
+    int fd = open(filepath, O_RDONLY);
     struct tetrimino_s *t;
 
-    if (!f_stream)
+    if (!fd)
         return;
-    t = init_tetrimino(f_stream, tetri_name);
+    t = init_tetrimino(fd, tetri_name);
     game->tetriminos = realloc_tetrimino(game->tetriminos, t);
     game->nb_tetriminos++;
-    fclose(f_stream);
+    close(fd);
 }
 
 static int scan_directory(char *folderpath, struct game_props_s *game)

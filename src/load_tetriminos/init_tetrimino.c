@@ -27,18 +27,14 @@ static char **analyse_tetrimino_props(char *line)
     return array;
 }
 
-static char **parse_first_line(FILE *f_stream)
+static char **parse_first_line(int fd)
 {
     char *line = NULL;
-    size_t n = 0;
-    ssize_t n_read;
     char **array;
 
-    n_read = getline(&line, &n, f_stream);
-    if (n_read == -1 || !line)
+    line = get_next_line(fd);
+    if (!line)
         return NULL;
-    if (line[n_read - 1] == '\n')
-        line[n_read - 1] = '\0';
     array = analyse_tetrimino_props(line);
     if (!array)
         return NULL;
@@ -78,10 +74,10 @@ static struct tetrimino_s *create_tetrimino(char *name)
     return t;
 }
 
-struct tetrimino_s *init_tetrimino(FILE *f_stream, char *tetri_name)
+struct tetrimino_s *init_tetrimino(int fd, char *tetri_name)
 {
     struct tetrimino_s *t = create_tetrimino(tetri_name);
-    char **array = parse_first_line(f_stream);
+    char **array = parse_first_line(fd);
 
     if (!array)
         return t;
@@ -89,7 +85,7 @@ struct tetrimino_s *init_tetrimino(FILE *f_stream, char *tetri_name)
     t->height = my_atoi(array[1]);
     t->color = my_atoi(array[2]);
     my_free_fields(array);
-    t->piece[0] = scan_piece(f_stream, t);
+    t->piece[0] = scan_piece(fd, t);
     if (t->name && t->width && t->height && t->color && t->piece[0])
         t->valid = true;
     return t;

@@ -35,17 +35,13 @@ static int is_valid_piece(char **piece, struct tetrimino_s *tetrimino)
     return 0;
 }
 
-char **scan_piece(FILE *f_stream, struct tetrimino_s *tetrimino)
+char **scan_piece(int fd, struct tetrimino_s *tetrimino)
 {
-    ssize_t n_read = 0;
-    size_t n = 0;
     char *line = NULL;
     char **piece = malloc(sizeof(char *) * 1);
 
     piece[0] = NULL;
-    while ((n_read = getline(&line, &n, f_stream)) != -1) {
-        if (line[n_read - 1] == '\n')
-            line[n_read - 1] = '\0';
+    while ((line = get_next_line(fd)) != NULL) {
         for (size_t j = my_strlen(line) - 1; line[j] == ' '; j--)
             line[j] = '\0';
         piece = my_realloc_array(piece, my_strdup(line));

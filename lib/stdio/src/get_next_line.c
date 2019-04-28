@@ -11,6 +11,17 @@
 #include "my_stdio.h"
 #include "my_string.h"
 
+static void check_fd(int fd, int *old_fd, char **db)
+{
+    if (*old_fd == -1)
+        *old_fd = fd;
+    if (*old_fd != fd) {
+        free(*db);
+        *db = NULL;
+        *old_fd = fd;
+    }
+}
+
 static char *get_next_newline(int fd, char *line, char **db)
 {
     char *buf = malloc(sizeof(char) * (READ_SIZE + 1));
@@ -37,10 +48,12 @@ static char *get_next_newline(int fd, char *line, char **db)
 
 char *get_next_line(int fd)
 {
+    static int old_fd = -1;
     static char *db = NULL;
     char *line = db;
     char *ptr = my_strchr(line, '\n');
 
+    check_fd(fd, &old_fd, &db);
     if (!line)
         line = my_strdup("");
     if (!line)
