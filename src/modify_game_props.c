@@ -10,8 +10,10 @@
 #include "my_stdio.h"
 #include "tetris.h"
 
-static int change_opt(int opt, struct game_props_s *game)
+static int change_opt(int opt, struct game_props_s *game, char **argv)
 {
+    if (optarg && my_strcmp(optarg, argv[optind - 1]) != 0)
+        return 84;
     for (int i = 0; args[i].change; i++) {
         if (opt == args[i].opt)
             return args[i].change(game, optarg);
@@ -26,7 +28,7 @@ int modify_game_props(int argc, char *argv[], struct game_props_s *game)
 
     opt = getopt_long(argc, argv, "L:l:r:t:d:q:p:wD", optlist, &optindex);
     while (opt != -1) {
-        if (change_opt(opt, game))
+        if (change_opt(opt, game, argv))
             return 84;
         opt = getopt_long(argc, argv, "L:l:r:t:d:q:p:wD", optlist, &optindex);
     }
