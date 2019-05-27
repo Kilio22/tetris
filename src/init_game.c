@@ -53,7 +53,9 @@ int init_game(struct game_props_s *game, char **env)
     int i = 0;
     char *buff = NULL;
 
-    for (; my_strncmp(env[i], "TERM", 4); i++);
+    for (; env[i] && my_strncmp(env[i], "TERM", 4); i++);
+    if (!env[i])
+        return my_error("Cannot find TERM var\n");
     game->term = my_strdup(&env[i][5]);
     init_base(game);
     init_keys(game);
