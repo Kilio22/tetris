@@ -6,21 +6,9 @@
 */
 
 #include <time.h>
+#include "my.h"
 #include "tetris.h"
 #include "my_string.h"
-
-static int setup_game(struct game_props_s *game)
-{
-    curs_set(0);
-    if (create_windows(game) == -1)
-        return -1;
-    if (!game->next)
-        print_next(game->win[NEXT], game);
-    print_score_board(game->win[SCORE], game);
-    for (int i = 0; i < NB_WINDOW; i++)
-        wrefresh(game->win[i]);
-    return 0;
-}
 
 static int destroy_game(struct game_props_s *game)
 {
@@ -37,17 +25,16 @@ static int destroy_game(struct game_props_s *game)
 static int game_launcher(struct game_props_s *game)
 {
     char line[READ_SIZE] = {0};
-    ssize_t n_read;
 
     initscr();
     my_set_term(0);
     if (setup_game(game) == -1)
         return -1;
     while (1) {
-        n_read = read(0, line, READ_SIZE);
+        read(0, line, READ_SIZE);
         if (my_strcmp(game->keys[QUIT], line) == 0)
             break;
-        my_memset(line, '\0', n_read);
+        my_memset(line, '\0', READ_SIZE);
         update_windows(game);
     }
     my_set_term(1);
