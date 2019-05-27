@@ -68,6 +68,7 @@ struct tetrimino_s {
 struct game_props_s {
     size_t level;
     size_t score;
+    size_t highscore;
     size_t size[2];
     bool next;
     bool debug;
@@ -76,6 +77,7 @@ struct game_props_s {
     struct tetrimino_s **tetriminos;
     char **map;
     char *term;
+    char **ascii_art;
     WINDOW *win[3];
 };
 
@@ -99,8 +101,14 @@ int is_readable_directory(const char *path);
 char *my_strcat_nofree(const char *left, const char *right);
 int print_help(char *bin_name);
 
+//updates
+int get_next_tetriminos(bool oui, struct game_props_s *game);
+
 //init_game.c
 int init_game(struct game_props_s *game, char **env);
+
+//setup game
+int setup_game(struct game_props_s *game);
 
 //debug
 void debug_mode(struct game_props_s *game);
@@ -111,6 +119,8 @@ int my_set_term(int status);
 //print_windows
 void print_score_board(WINDOW *win, struct game_props_s *game);
 void print_next(WINDOW *win, struct game_props_s *game);
+void print_game_board(WINDOW *win, struct game_props_s *game);
+void print_ascii_art(struct game_props_s *game);
 
 //window_managment
 void update_windows(struct game_props_s *game);
