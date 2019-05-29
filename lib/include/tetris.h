@@ -56,6 +56,12 @@ enum key_str {
     PAUSE
 };
 
+struct map_s {
+    char c;
+    int id;
+    unsigned char color;
+};
+
 struct tetrimino_s {
     char *name;
     size_t width;
@@ -75,7 +81,7 @@ struct game_props_s {
     my_key_t keys[KEY_NB];
     int nb_tetriminos;
     struct tetrimino_s **tetriminos;
-    char **map;
+    struct map_s **map;
     char *term;
     char **ascii_art;
     WINDOW *win[3];
@@ -100,9 +106,13 @@ int my_error(char *str);
 int is_readable_directory(const char *path);
 char *my_strcat_nofree(const char *left, const char *right);
 int print_help(char *bin_name);
+int my_find_char_inmap(struct map_s **map, int i, struct game_props_s *game, char c);
 
 //updates
 int get_next_tetriminos(bool oui, struct game_props_s *game);
+int add_new_tetrimino(struct game_props_s *game);
+int update_game(struct game_props_s *game);
+int check_full_piece(struct game_props_s *game);
 
 //init_game.c
 int init_game(struct game_props_s *game, char **env);
@@ -121,6 +131,7 @@ void print_score_board(WINDOW *win, struct game_props_s *game);
 void print_next(WINDOW *win, struct game_props_s *game);
 void print_game_board(WINDOW *win, struct game_props_s *game);
 void print_ascii_art(struct game_props_s *game);
+void print_new_tetrimino(struct game_props_s *game);
 
 //window_managment
 void update_windows(struct game_props_s *game);

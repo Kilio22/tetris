@@ -63,6 +63,8 @@ SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
 		$(MOD_FUNCTIONS)/change_turnkey.c \
 		$(MOD_FUNCTIONS)/function_constants.c \
 		$(MOD_FUNCTIONS)/option_constants.c \
+		add_tetrimino_to_map.c	\
+		check_full_piece.c	\
 		debug_mode.c	\
 		display_help.c \
 		global_constants.c	\
@@ -74,6 +76,7 @@ SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
 		print_game_board.c	\
 		print_windows.c	\
 		setup_game.c	\
+		update_game.c	\
 		windows_managment.c
 
 SRC_LIB	=	stdio my string ncurses
