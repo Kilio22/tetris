@@ -53,13 +53,17 @@ static void get_art(struct game_props_s *game)
 static void init_map(struct game_props_s *game)
 {
     size_t i = 0;
+    size_t j = 0;
 
-    game->map = malloc(sizeof(char *) * (game->size[1] + 1));
+    game->map = malloc(sizeof(struct map_s *) * (game->size[0] + 1));
     if (!game->map)
         exit(84);
-    for (; i < game->size[1]; i++) {
-        game->map[i] = malloc(sizeof(char) * (game->size[0] + 1));
-        my_memset(game->map[i], '\0', game->size[0] + 1);
+    for (; i < game->size[0]; i++) {
+        game->map[i] = malloc(sizeof(struct map_s) * (game->size[1]));
+        for (j = 0; j < game->size[1]; j++) {
+            game->map[i][j].c = ' ';
+            game->map[i][j].id = 0;
+        }
     }
     game->map[i] = NULL;
 }
@@ -71,17 +75,19 @@ int setup_game(struct game_props_s *game)
     init_map(game);
     get_art(game);
     get_highscore(game);
-    for (int i = 0; i < 255; i++)
+    for (int i = 1; i <= 255; i++)
         init_pair(i, i, 0);
     if (create_windows(game) == -1)
         return -1;
     get_next_tetriminos(true, game);
+    add_new_tetrimino(game);
     print_ascii_art(game);
     if (!game->next)
         print_next(game->win[NEXT], game);
     print_score_board(game->win[SCORE], game);
+    print_game_board(game->win[GAME], game);
+    refresh();
     for (int i = 0; i < NB_WINDOW; i++)
         wrefresh(game->win[i]);
-    refresh();
     return 0;
 }
