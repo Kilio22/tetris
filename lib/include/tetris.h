@@ -106,7 +106,8 @@ int my_error(char *str);
 int is_readable_directory(const char *path);
 char *my_strcat_nofree(const char *left, const char *right);
 int print_help(char *bin_name);
-int my_find_char_inmap(struct map_s **map, int i, struct game_props_s *game, char c);
+int my_find_char_inmap(struct map_s **map, int i,
+struct game_props_s *game, char c);
 
 //updates
 int get_next_tetriminos(bool oui, struct game_props_s *game);
