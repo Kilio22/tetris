@@ -63,6 +63,7 @@ static void init_map(struct game_props_s *game)
         for (j = 0; j < game->size[1]; j++) {
             game->map[i][j].c = ' ';
             game->map[i][j].id = 0;
+            game->map[i][j].color = 0;
         }
     }
     game->map[i] = NULL;
