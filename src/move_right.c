@@ -34,6 +34,7 @@ game->map[i][j].id == 2 && j + 1 < (int) game->size[1]) {
             game->map[i][j + 1].id = 2;
             game->map[i][j + 1].c = '*';
             game->map[i][j + 1].color = game->map[i][j].color;
+            game->map[i][j].color = 0;
         }
     }
 }
