@@ -106,14 +106,14 @@ int my_error(char *str);
 int is_readable_directory(const char *path);
 char *my_strcat_nofree(const char *left, const char *right);
 int print_help(char *bin_name);
-int my_find_char_inmap(struct map_s **map, int i,
-struct game_props_s *game, char c);
 
 //updates
 int get_next_tetriminos(bool oui, struct game_props_s *game);
 int add_new_tetrimino(struct game_props_s *game);
 int update_game(struct game_props_s *game);
 int check_full_piece(struct game_props_s *game);
+int analyse_key_pressed(struct game_props_s *game, char *line);
+int rotate_current_piece(struct game_props_s *game);
 
 //init_game.c
 int init_game(struct game_props_s *game, char **env);
