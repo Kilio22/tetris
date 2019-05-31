@@ -27,7 +27,8 @@ static int get_max_right(struct game_props_s *game, int i)
 static void apply_move(int i, struct game_props_s *game)
 {
     for (int j = game->size[1] - 1; j >= 0; j--) {
-        if (game->map[i][j].c == '*' && game->map[i][j].id == 2 && j + 1 < (int) game->size[1]) {
+        if (game->map[i][j].c == '*' &&
+game->map[i][j].id == 2 && j + 1 < (int) game->size[1]) {
             game->map[i][j].c = ' ';
             game->map[i][j].id = 0;
             game->map[i][j + 1].id = 2;
