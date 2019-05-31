@@ -120,6 +120,7 @@ int analyse_key_pressed(struct game_props_s *game, char *line);
 int rotate_current_piece(struct game_props_s *game);
 void move_right(struct game_props_s *game);
 void move_left(struct game_props_s *game);
+int drop_tetrimino(struct game_props_s *game);
 
 //init_game.c
 int init_game(struct game_props_s *game, char **env);

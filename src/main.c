@@ -33,12 +33,17 @@ static int check_too_small_term(void)
     return 0;
 }
 
-void analyse_keys(struct game_props_s *game, char *line)
+int analyse_keys(struct game_props_s *game, char *line)
 {
+    if (!my_strcmp(game->keys[QUIT], line))
+        return 1;
     if (!my_strcmp(line, game->keys[LEFT]))
-        return move_left(game);
+        return move_left(game), 0;
     if (!my_strcmp(line, game->keys[RIGHT]))
-        return move_right(game);
+        return move_right(game), 0;
+    if (!my_strcmp(line, game->keys[DROP]))
+        return drop_tetrimino(game);
+    return 0;
 }
 
 static int game_launcher(struct game_props_s *game)
@@ -52,9 +57,8 @@ static int game_launcher(struct game_props_s *game)
     while (1) {
         my_memset(line, '\0', READ_SIZE);
         read(0, line, READ_SIZE);
-        if (my_strcmp(game->keys[QUIT], line) == 0)
+        if (analyse_keys(game, line) == 1)
             break;
-        analyse_keys(game, line);
         if (check_too_small_term() == -1)
             continue;
         if (update_game(game) == -1)

@@ -31,8 +31,8 @@ int check_full_piece(struct game_props_s *game)
             return add_new_tetrimino(game);
         else
             n_return = check_lines_piece(game, i);
-        if (n_return == -1)
-            return -1;
+        if (n_return == -1 || n_return == 1)
+            return n_return;
     }
     return 0;
 }
