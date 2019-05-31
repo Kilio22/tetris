@@ -18,15 +18,6 @@ int check_lines_piece(struct game_props_s *game, int i)
     return 0;
 }
 
-int my_find_char_inmap(struct map_s **map, int i,
-struct game_props_s *game, char c)
-{
-    for (size_t j = 0; j < game->size[1]; j++)
-        if (map[i][j].c == c && map[i][j].id == 2)
-            return j;
-    return -1;
-}
-
 int check_full_piece(struct game_props_s *game)
 {
     int i = 0;

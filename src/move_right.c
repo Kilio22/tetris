@@ -16,6 +16,8 @@ static int get_max_right(struct game_props_s *game, int i)
         tmp = my_find_char_inmap_rev(game->map, i, game, '*');
         if (tmp == -1)
             continue;
+        if (tmp < (int)game->size[1] - 1 && game->map[i][tmp + 1].id != 0)
+            return -1;
         if (tmp > pos)
             pos = tmp;
     }
@@ -24,8 +26,8 @@ static int get_max_right(struct game_props_s *game, int i)
 
 static void apply_move(int i, struct game_props_s *game)
 {
-    for (size_t j = game->size[1] - 1; j > 0; j--) {
-        if (game->map[i][j].c == '*' && j + 1 < game->size[1]) {
+    for (int j = game->size[1] - 1; j >= 0; j--) {
+        if (game->map[i][j].c == '*' && game->map[i][j].id == 2 && j + 1 < (int) game->size[1]) {
             game->map[i][j].c = ' ';
             game->map[i][j].id = 0;
             game->map[i][j + 1].id = 2;
@@ -46,7 +48,7 @@ void move_right(struct game_props_s *game)
         max_right = get_max_right(game, i);
         break;
     }
-    if (max_right <= 0 || max_right == (int)game->size[1] - 1)
+    if (max_right < 0 || max_right == (int)game->size[1] - 1)
         return;
     for (; game->map[i] &&
 my_find_char_inmap(game->map, i, game, '*') == -1; i++);
