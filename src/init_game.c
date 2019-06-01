@@ -45,6 +45,7 @@ int init_base(struct game_props_s *game)
     game->tetriminos = malloc(sizeof(struct tetrimino_s *));
     game->tetriminos[0] = NULL;
     game->score = 0;
+    game->rotation = 0;
     return 0;
 }
 
@@ -61,7 +62,7 @@ int init_game(struct game_props_s *game, char **env)
     init_keys(game);
     buff = tigetstr("smkx");
     if (check_term_size(game))
-        return my_error("To small terminal");
+        return my_error("Too small terminal");
     if (buff == NULL)
         return 0;
     if (putp(buff) == -1)

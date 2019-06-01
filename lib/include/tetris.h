@@ -78,6 +78,7 @@ struct game_props_s {
     size_t size[2];
     bool next;
     bool debug;
+    int rotation;
     my_key_t keys[KEY_NB];
     int nb_tetriminos;
     struct tetrimino_s **tetriminos;
@@ -121,6 +122,7 @@ int rotate_current_piece(struct game_props_s *game);
 void move_right(struct game_props_s *game);
 void move_left(struct game_props_s *game);
 int drop_tetrimino(struct game_props_s *game);
+void remove_full_lines(struct game_props_s *game);
 
 //init_game.c
 int init_game(struct game_props_s *game, char **env);

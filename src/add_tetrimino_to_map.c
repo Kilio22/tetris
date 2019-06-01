@@ -41,10 +41,12 @@ int add_new_tetrimino(struct game_props_s *game)
     int nb_tetri = 0;
     int x = 0;
 
+    game->rotation = 0;
     nb_tetri = get_next_tetriminos(false, game);
     get_next_tetriminos(true, game);
     for (size_t i = 0; game->map[i]; i++)
         reinit_map(game, i);
+    remove_full_lines(game);
     x = (game->size[1] - game->tetriminos[nb_tetri]->width) / 2;
     for (size_t i = 0; game->tetriminos[nb_tetri]->piece[0][i]; i++) {
         if (add_line(game, i, x, nb_tetri) == -1)

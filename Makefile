@@ -64,6 +64,7 @@ SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
 		$(MOD_FUNCTIONS)/function_constants.c \
 		$(MOD_FUNCTIONS)/option_constants.c \
 		add_tetrimino_to_map.c	\
+		analyse_key_pressed.c	\
 		check_full_piece.c	\
 		debug_mode.c	\
 		display_help.c \
@@ -78,6 +79,8 @@ SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
 		print_ascii_art.c	\
 		print_game_board.c	\
 		print_windows.c	\
+		remove_full_lines.c	\
+		rotate_piece.c	\
 		setup_game.c	\
 		update_game.c	\
 		windows_managment.c
