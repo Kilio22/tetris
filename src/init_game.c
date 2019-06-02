@@ -44,6 +44,7 @@ int init_base(struct game_props_s *game)
     game->nb_tetriminos = 0;
     game->tetriminos = malloc(sizeof(struct tetrimino_s *));
     game->tetriminos[0] = NULL;
+    game->curr = NULL;
     game->score = 0;
     game->rotation = 0;
     return 0;

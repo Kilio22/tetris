@@ -43,6 +43,7 @@ int add_new_tetrimino(struct game_props_s *game)
 
     game->rotation = 0;
     nb_tetri = get_next_tetriminos(false, game);
+    game->curr = game->tetriminos[nb_tetri];
     get_next_tetriminos(true, game);
     for (size_t i = 0; game->map[i]; i++)
         reinit_map(game, i);

@@ -79,6 +79,7 @@ struct game_props_s {
     bool next;
     bool debug;
     int rotation;
+    struct tetrimino_s *curr;
     my_key_t keys[KEY_NB];
     int nb_tetriminos;
     struct tetrimino_s **tetriminos;
