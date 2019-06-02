@@ -72,9 +72,12 @@ SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
 		game_loop.c \
 		global_constants.c	\
 		init_game.c	\
+		init_menu.c	\
+		menu.c	\
 		modify_game_props.c	\
 		move_left.c	\
 		move_right.c	\
+		my_get_line.c	\
 		my_set_term.c	\
 		utils.c	\
 		print_ascii_art.c	\

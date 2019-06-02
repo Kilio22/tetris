@@ -22,10 +22,28 @@ static int destroy_game(struct game_props_s *game)
     return 0;
 }
 
-static int game_launcher(struct game_props_s *game)
+static void first_init(void)
 {
     initscr();
     my_set_term(0);
+    curs_set(0);
+    start_color();
+    for (int i = 1; i <= 255; i++)
+        init_pair(i, i, 0);
+}
+
+static int game_launcher(struct game_props_s *game)
+{
+    int n_return = 0;
+
+    first_init();
+    if (game->debug == false)
+        n_return = menu();
+    if (n_return > 0) {
+        my_set_term(1);
+        endwin();
+        return 84;
+    }
     if (setup_game(game) == -1)
         return -1;
     game_loop(game);
