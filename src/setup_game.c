@@ -12,15 +12,15 @@
 
 static void get_highscore(struct game_props_s *game)
 {
-    int fd = open(".highscore", O_RDONLY);
+    FILE *stream = fopen(".highscore", "r");
     char *line = NULL;
 
-    if (fd == -1) {
+    if (!stream) {
         game->highscore = 0;
         return;
     }
-    line = get_next_line(fd);
-    close(fd);
+    line = get_line(stream);
+    fclose(stream);
     if (!line) {
         game->highscore = 0;
         return;
@@ -34,21 +34,21 @@ static void get_highscore(struct game_props_s *game)
 
 static void get_art(struct game_props_s *game)
 {
-    int fd = open("src/ascii.txt", O_RDONLY);
+    FILE *stream = fopen("src/ascii.txt", "r");
     char **ascii = malloc(sizeof(char *));
     char *line = NULL;
     int i = 0;
 
-    if (fd == -1 || !ascii)
+    if (!stream || !ascii)
         exit(84);
     ascii[0] = NULL;
-    while ((line = get_next_line(fd)) != NULL && i < 9) {
+    while ((line = get_line(stream)) != NULL && i < 9) {
         ascii = my_realloc_array(ascii, line);
         if (!ascii)
             exit(84);
         i++;
     }
-    close(fd);
+    fclose(stream);
     game->ascii_art = ascii;
 }
 

@@ -91,8 +91,8 @@ struct game_props_s {
 //load tetriminos
 int load_tetriminos(struct game_props_s *game);
 void sort_tetriminos(struct tetrimino_s **tetriminos);
-char **scan_piece(int fd, struct tetrimino_s *tetrimino);
-struct tetrimino_s *init_tetrimino(int fd, char *tetri_name);
+char **scan_piece(FILE *stream, struct tetrimino_s *tetrimino);
+struct tetrimino_s *init_tetrimino(FILE *stream, char *tetri_name);
 struct tetrimino_s **realloc_tetrimino(struct tetrimino_s **old,
                                         struct tetrimino_s *to_add);
 
