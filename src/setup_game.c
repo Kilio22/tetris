@@ -37,14 +37,16 @@ static void get_art(struct game_props_s *game)
     int fd = open("src/ascii.txt", O_RDONLY);
     char **ascii = malloc(sizeof(char *));
     char *line = NULL;
+    int i = 0;
 
     if (fd == -1 || !ascii)
         exit(84);
     ascii[0] = NULL;
-    while ((line = get_next_line(fd)) != NULL) {
+    while ((line = get_next_line(fd)) != NULL && i < 9) {
         ascii = my_realloc_array(ascii, line);
         if (!ascii)
             exit(84);
+        i++;
     }
     close(fd);
     game->ascii_art = ascii;
@@ -71,13 +73,9 @@ static void init_map(struct game_props_s *game)
 
 int setup_game(struct game_props_s *game)
 {
-    curs_set(0);
-    start_color();
     init_map(game);
     get_art(game);
     get_highscore(game);
-    for (int i = 1; i <= 255; i++)
-        init_pair(i, i, 0);
     if (create_windows(game) == -1)
         return -1;
     get_next_tetriminos(true, game);
