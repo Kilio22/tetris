@@ -43,11 +43,11 @@ void game_loop(struct game_props_s *game)
     while (1) {
         my_memset(line, '\0', READ_SIZE);
         read(0, line, READ_SIZE);
-        drop = time_to_drop(game->level);
         if (analyse_key_pressed(game, line) != 0)
             break;
         if (check_too_small_term() == -1)
             continue;
+        drop = time_to_drop(game->level);
         if (update_game(game, drop) == -1)
             break;
         update_windows(game);
