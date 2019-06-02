@@ -33,6 +33,29 @@ static void first_init(void)
         init_pair(i, i, 0);
 }
 
+void write_piece(struct game_props_s *game, size_t *old_center)
+{
+    size_t new_center[2] = {0, 0};
+    int i = 0;
+    bool stared = false;
+
+    get_current_piece_center(game, new_center);
+    i = old_center[0] - new_center[0];
+    for (; game->map[i] && game->curr->piece[game->rotation][i]; i++) {
+        for (int j = old_center[1] - new_center[1];
+game->curr->piece[game->rotation][i][j] != '\0'; j++) {
+            game->map[i][j].c = game->curr->piece[game->rotation][i][j];
+            game->map[i][j].color = game->curr->color;
+            if (game->curr->piece[game->rotation][i][j] == '*')
+                stared = true;
+            if (stared == true)
+                game->map[i][j].id = 2;
+            else
+                game->map[i][j].id = 0;
+        }
+    }
+}
+
 static int game_launcher(struct game_props_s *game)
 {
     int n_return = 0;
