@@ -57,7 +57,7 @@ int menu(void)
 {
     int highlight = 0;
     char key;
-    char ***logo = get_logo();
+    char ***logo = get_logo("src/ascii.txt");
 
     if (!logo)
         return 84;
