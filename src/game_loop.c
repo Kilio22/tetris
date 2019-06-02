@@ -35,26 +35,6 @@ static bool time_to_drop(size_t level)
     return false;
 }
 
-static void get_piece_center(struct game_props_s *game,
-                                struct tetrimino_s *piece, size_t *center)
-{
-    size_t i = 0;
-    size_t j = 0;
-
-    (void)center;
-    for (; game->map[i] && my_find_char_inmap(game->map, i, game, '*') == -1; i++);
-    i += piece->height / 2;
-    for (; j < game->size[1]; j++) {
-        if (game->map[i][j].id == 2)
-            break;
-    }
-    if (piece->width % 2 == 0)
-        j += piece->width / 2 - 1;
-    else
-        j += piece->width / 2;
-//    fprintf(stderr, "%ld %ld\n", i, j);
-}
-
 void game_loop(struct game_props_s *game)
 {
     char line[READ_SIZE] = {0};
