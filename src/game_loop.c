@@ -42,7 +42,8 @@ static void get_piece_center(struct game_props_s *game,
     size_t j = 0;
 
     (void)center;
-    for (; game->map[i] && my_find_char_inmap(game->map, i, game, '*') == -1; i++);
+    for (; game->map[i] &&
+my_find_char_inmap(game->map, i, game, '*') == -1; i++);
     i += piece->height / 2;
     for (; j < game->size[1]; j++) {
         if (game->map[i][j].id == 2)
