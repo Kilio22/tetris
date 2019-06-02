@@ -23,13 +23,13 @@ static char ***init_tab(void)
     return new;
 }
 
-static int get_file_logo(char ****logo, FILE *stream)
+static int get_file_logo(char ****logo, int fd)
 {
     char *line = NULL;
     int i = 0;
     int j = 0;
 
-    while ((line = get_line(stream)) != NULL) {
+    while ((line = get_next_line(fd)) != NULL) {
         if (j == 9) {
             i++;
             j = 0;
@@ -45,14 +45,14 @@ static int get_file_logo(char ****logo, FILE *stream)
 
 char ***get_logo(void)
 {
-    FILE *stream = fopen("src/ascii.txt", "r");
+    int fd = open("src/ascii.txt", O_RDONLY);
     char ***logo = init_tab();
 
-    if (!stream || !logo) {
+    if (fd == -1 || !logo) {
         free(logo);
         exit(84);
     }
-    if (get_file_logo(&logo, stream) == -1)
+    if (get_file_logo(&logo, fd) == -1)
         exit(84);
     return logo;
 }
