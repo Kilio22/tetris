@@ -22,36 +22,13 @@ static int destroy_game(struct game_props_s *game)
     return 0;
 }
 
-static int check_too_small_term(void)
-{
-    if (COLS < 190 || LINES < 45) {
-        clear();
-        mvprintw(LINES / 2, COLS / 2 - 8, "ENLARGE YOUR TERMINAL");
-        refresh();
-        return -1;
-    }
-    return 0;
-}
-
 static int game_launcher(struct game_props_s *game)
 {
-    char line[READ_SIZE] = {0};
-
     initscr();
     my_set_term(0);
     if (setup_game(game) == -1)
         return -1;
-    while (1) {
-        my_memset(line, '\0', READ_SIZE);
-        read(0, line, READ_SIZE);
-        if (analyse_key_pressed(game, line) != 0)
-            break;
-        if (check_too_small_term() == -1)
-            continue;
-        if (update_game(game) == -1)
-            break;
-        update_windows(game);
-    }
+    game_loop(game);
     my_set_term(1);
     destroy_game(game);
     return 0;

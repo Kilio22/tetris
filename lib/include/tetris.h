@@ -113,9 +113,10 @@ int my_find_char_inmap_rev(struct map_s **map, int i,
 struct game_props_s *game, char c);
 
 //updates
+void game_loop(struct game_props_s *game);
 int get_next_tetriminos(bool oui, struct game_props_s *game);
 int add_new_tetrimino(struct game_props_s *game);
-int update_game(struct game_props_s *game);
+int update_game(struct game_props_s *game, bool drop);
 int check_full_piece(struct game_props_s *game);
 int analyse_key_pressed(struct game_props_s *game, char *line);
 int rotate_current_piece(struct game_props_s *game);
