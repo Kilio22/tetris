@@ -15,8 +15,11 @@ int get_next_tetriminos(bool oui, struct game_props_s *game)
         return i;
     while (game->tetriminos[i] && !game->tetriminos[i]->valid)
         ++i;
-    if (i == game->nb_tetriminos)
+    if (i == game->nb_tetriminos) {
+        my_set_term(1);
+        endwin();
         exit(84);
+    }
     while (1) {
         i = rand() % game->nb_tetriminos;
         if (game->tetriminos[i]->valid)
