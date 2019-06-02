@@ -72,9 +72,9 @@ struct tetrimino_s {
 };
 
 struct game_props_s {
-    size_t level;
-    size_t score;
-    size_t highscore;
+    int level;
+    int score;
+    int highscore;
     size_t size[2];
     bool next;
     bool debug;
@@ -112,6 +112,7 @@ int my_find_char_inmap(struct map_s **map, int i,
 struct game_props_s *game, char c);
 int my_find_char_inmap_rev(struct map_s **map, int i,
 struct game_props_s *game, char c);
+void write_highscore(struct game_props_s *game);
 
 //updates
 void game_loop(struct game_props_s *game);

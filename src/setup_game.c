@@ -80,6 +80,7 @@ int setup_game(struct game_props_s *game)
         return -1;
     get_next_tetriminos(true, game);
     add_new_tetrimino(game);
+    game->score -= 2;
     print_ascii_art(game);
     if (!game->next)
         print_next(game->win[NEXT], game);

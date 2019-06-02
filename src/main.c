@@ -12,6 +12,7 @@
 
 static int destroy_game(struct game_props_s *game)
 {
+    write_highscore(game);
     for (int i = 0; i < NB_WINDOW; i++)
         delwin(game->win[i]);
     endwin();

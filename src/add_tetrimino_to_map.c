@@ -41,6 +41,7 @@ int add_new_tetrimino(struct game_props_s *game)
     int nb_tetri = 0;
     int x = 0;
 
+    game->score += 2;
     game->rotation = 0;
     nb_tetri = get_next_tetriminos(false, game);
     game->curr = game->tetriminos[nb_tetri];
