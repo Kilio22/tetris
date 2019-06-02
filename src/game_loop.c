@@ -52,7 +52,6 @@ static void get_piece_center(struct game_props_s *game,
         j += piece->width / 2 - 1;
     else
         j += piece->width / 2;
-//    fprintf(stderr, "%ld %ld\n", i, j);
 }
 
 void game_loop(struct game_props_s *game)
