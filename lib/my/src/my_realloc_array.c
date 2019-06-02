@@ -17,7 +17,7 @@ char **my_realloc_array(char **array, char *line)
         return NULL;
     for (size_t i = 0; i < len; i++)
         new_array[i] = array[i];
-    new_array[len] = line;
+    new_array[len] = my_strdup(line);
     new_array[len + 1] = NULL;
     free(array);
     return (new_array);
