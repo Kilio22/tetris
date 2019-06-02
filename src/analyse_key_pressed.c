@@ -24,5 +24,7 @@ int analyse_key_pressed(struct game_props_s *game, char *line)
     }
     if (STR_EQ(game->keys[DROP], line))
         return drop_tetrimino(game);
+    if (STR_EQ(game->keys[PAUSE], line))
+        return menu_pause();
     return 0;
 }

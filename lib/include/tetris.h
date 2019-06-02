@@ -169,8 +169,10 @@ int change_dropkey(struct game_props_s *game, char *arg);
 int change_pausekey(struct game_props_s *game, char *arg);
 
 /* MENU*/
-char ***get_logo(void);
+char ***get_logo(const char *fp);
 int menu(void);
+int menu_pause(void);
+char *get_line(FILE *f_stream);
 
 extern const struct game_changer_s args[];
 

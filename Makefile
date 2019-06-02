@@ -44,6 +44,7 @@ TESTS_PATH	=	$(ROOT_PATH)$(TESTS_NAME)
 
 LOAD_TETRIMIN	=	load_tetriminos
 MOD_FUNCTIONS	=	modifier_functions
+MENU	=	menu/
 
 SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
 		$(LOAD_TETRIMIN)/init_tetrimino.c \
@@ -72,8 +73,10 @@ SRC	=	$(LOAD_TETRIMIN)/get_tetrimino_piece.c \
 		game_loop.c \
 		global_constants.c	\
 		init_game.c	\
-		init_menu.c	\
-		menu.c	\
+		$(MENU)init_menu.c	\
+		$(MENU)menu_pause.c	\
+		$(MENU)menu.c	\
+		my_get_line.c	\
 		modify_game_props.c	\
 		move_left.c	\
 		move_right.c	\
