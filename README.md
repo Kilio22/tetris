@@ -4,13 +4,13 @@
 - **Group members:**  
   - [@Kilio22](https://github.com/Kilio22)
   - [@HeyShafty](https://github.com/HeyShafty)
-- **Mark:**
+- **Mark:** 94.3%
 
 ## Subject
 
 The goal of this project is to recreate the Tetris game in a UNIX terminal, with the Gameboy version rules.  
 You have to use ncurses.
-In the folder of your binary, there must be a *tetriminos* directory, which contains files that describe the game pieces.
+In the folder of your  94.binary, there must be a *tetriminos* directory, which contains files that describe the game pieces.
 
 These files are composed in the following way:
 - on the first line, the size and color of the piece in this format: width height color_code\n (the number of the color corresponds to the ncurses capacity’s color numbers),
